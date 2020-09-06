@@ -1,28 +1,10 @@
 import Head from 'next/head';
-import { useQuery, gql } from '@apollo/client';
 import styles from '../styles/Home.module.css';
 import AddNoteForm from '../components/AddNoteForm';
-
-interface Note {
-  id: number;
-  content: string;
-}
-
-interface NotesQuery {
-  notes: Note[];
-}
-
-const NotesDocument = gql`
-  query Notes {
-    notes {
-      id
-      content
-    }
-  }
-`;
+import { useNotesQuery } from '../generated/graphql-frontend';
 
 export default function Home() {
-  const { data, loading, error, refetch } = useQuery<NotesQuery>(NotesDocument);
+  const { data, loading, error, refetch } = useNotesQuery();
   const notes = data?.notes;
 
   return (

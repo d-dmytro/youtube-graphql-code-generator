@@ -1,0 +1,6 @@
+query Notes {
+  notes {
+    id
+    content
+  }
+}

@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import styles from '../styles/AddNoteForm.module.css';
-
-const AddNoteDocument = gql`
-  mutation AddNote($input: AddNoteInput!) {
-    addNote(input: $input) {
-      id
-      content
-    }
-  }
-`;
+import { useAddNoteMutation } from '../generated/graphql-frontend';
 
 const AddNoteForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   const [content, setContent] = useState('');
@@ -18,7 +10,7 @@ const AddNoteForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
     setContent(e.target.value);
   };
 
-  const [addNote, { loading }] = useMutation(AddNoteDocument);
+  const [addNote, { loading }] = useAddNoteMutation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

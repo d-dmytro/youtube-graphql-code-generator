@@ -1,6 +1,6 @@
 overwrite: true
 schema: 'http://localhost:3000/api/graphql'
-documents: null
+documents: 'graphql/**/*.graphql'
 generates:
   generated/graphql-backend.ts:
     plugins:
@@ -8,3 +8,8 @@ generates:
       - 'typescript-resolvers'
     config:
       useIndexSignature: true
+  generated/graphql-frontend.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
